@@ -7,7 +7,7 @@ import Loader from '../components/Loader';
 
 class Cards extends Component {
   componentDidMount() {
-      this.props.fetchData(`https://api.pokemontcg.io/v1/cards?setCode=${this.props.match.params.cardSetsData}`);
+      this.props.fetchData(`https://api.pokemontcg.io/v1/cards?setCode=${this.props.match.params.cardsData}`);
   }
   render (){
     if(this.props.allCards.cards === undefined){

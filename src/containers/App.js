@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
 import './App.css';
 import CardSets from './CardSets'
 import Cards from './Cards';
@@ -22,7 +21,7 @@ class App extends Component {
           </div>
         </div>
         <Route exact path={`/`} render={(props) => <CardSets {...props} cardSetsData={this.props.allSets} />} />
-        <Route path={`/cardsSetCode=:cardSetsData`} render={(props) => <Cards {...props} />}/>
+        <Route path={`/cardsSetCode=:cardsData`} render={(props) => <Cards {...props} />}/>
         <Route path={`/cards/:cardAboutData`} render={(props) => <CardAbout {...props} />}/>
       </Router>
     );
