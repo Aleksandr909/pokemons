@@ -10,10 +10,10 @@ class Cards extends Component {
       this.props.fetchData(`https://api.pokemontcg.io/v1/cards?setCode=${this.props.match.params.cardsData}`);
   }
   render (){
-    if(this.props.allCards.cards === undefined){
+    if(this.props.allCards === undefined){
         return <Loader />
     }
-    const cardsData = this.props.allCards.cards
+    const cardsData = this.props.allCards
     const allCards = cardsData.map(cardData =>
       <Link className='Link cardLink' key={cardData.id} to={`/cards/${cardData.id}`}>
         <Card thisCardData = {cardData} />
@@ -29,7 +29,7 @@ class Cards extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    allCards: state.allSets,
+    allCards: state.data.cards,
   };
 };
 

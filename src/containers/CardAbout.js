@@ -8,11 +8,10 @@ class CardAbout extends Component {
       this.props.fetchData(`https://api.pokemontcg.io/v1/cards/${this.props.match.params.cardAboutData}`);
   }
   render (){
-    if(this.props.cardAbout.card === undefined){
+    if(this.props.cardAbout === undefined){
         return <Loader />
     }
-    console.log(this.props.cardAbout.card)
-    const cardsData = this.props.cardAbout.card
+    const cardsData = this.props.cardAbout
 
     return(
       <div className='cardAbout'>
@@ -63,22 +62,10 @@ class CardAbout extends Component {
     )
   }
 }
-const mapStateToProps = (state) => {
-  return {
-    cardAbout: state.allSets,
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchData: url => dispatch(cardAboutFetchData(url))
-  };
-};
 
 const cardAbout_right_attack = attacks => {
   if (attacks !== undefined){
-    let allAttacks;
-    return allAttacks = attacks.map(attack =>
+    const allAttacks = attacks.map(attack =>
       <div key={attack.name} className='cardAbout_right_attack'>
         <div className='cardAbout_right_attack_types-attacksName-attacksDamage'>
           <div className='cardAbout_right_attack_types-attacksName'>
@@ -92,7 +79,8 @@ const cardAbout_right_attack = attacks => {
           <p>{attack.text}</p>
         </div>
       </div>
-    )
+    );
+    return allAttacks
   } else {
     return <p className='h5'>N/A</p>
   }
@@ -100,10 +88,10 @@ const cardAbout_right_attack = attacks => {
 
 const cardAbout_right_weaknesses = weaknesses => {
   if (weaknesses !== undefined){
-    let allWeaknesses;
-    return allWeaknesses = weaknesses.map(weaknesses =>
+    const allWeaknesses = weaknesses.map(weaknesses =>
       <p key={weaknesses.type} className='h5'>{weaknesses.type} {weaknesses.value}</p>
-    )
+    );
+    return allWeaknesses
   } else {
     return <p className='h5'>N/A</p>
   }
@@ -111,13 +99,23 @@ const cardAbout_right_weaknesses = weaknesses => {
 
 const cardAbout_right_retreatCost = retreatCost => {
   if (retreatCost !== undefined){
-    let allRetreatCost;
-    return allRetreatCost = retreatCost.map((retreatCostItem, value) =>
+    const allRetreatCost = retreatCost.map((retreatCostItem, value) =>
       <p key={retreatCostItem + value} className='h5'>{retreatCostItem}</p>
-    )
+    );
+    return allRetreatCost
   } else {
     return <p className='h5'>N/A</p>
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    cardAbout: state.data.card,
+  };
+};
 
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchData: url => dispatch(cardAboutFetchData(url))
+  };
+};
 export default connect(mapStateToProps, mapDispatchToProps)(CardAbout);
