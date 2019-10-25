@@ -3,8 +3,9 @@ import './App.css';
 import CardSets from './CardSets'
 import Cards from './Cards';
 import CardAbout from './CardAbout';
+import NotFound from '../components/NotFound'
 import { createBrowserHistory as createHistory } from 'history'
-import { Link, Router, Route } from 'react-router-dom'
+import { Switch, Link, Router, Route } from 'react-router-dom'
 
 
 const history = createHistory()
@@ -19,10 +20,14 @@ class App extends Component {
               <span className='headerNav_item h3'> Sets </span>
             </Link>
           </div>
+          <Switch>
+            <Route exact path={`/`} component={CardSets} />
+            <Route path={`/cardsSetCode=:cardsData`} component={Cards} />
+            <Route path={`/cards/:cardAboutData`} component={CardAbout} />
+            <Route path="*" component={NotFound} />
+          </Switch>
         </div>
-        <Route exact path={`/`} render={(props) => <CardSets {...props} cardSetsData={this.props.allSets} />} />
-        <Route path={`/cardsSetCode=:cardsData`} render={(props) => <Cards {...props} />}/>
-        <Route path={`/cards/:cardAboutData`} render={(props) => <CardAbout {...props} />}/>
+
       </Router>
     );
   }

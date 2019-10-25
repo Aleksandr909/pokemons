@@ -29,7 +29,7 @@ class CardSets extends Component {
 }
 
 
-const mapStateToProps = (state) => {console.log(state);
+const mapStateToProps = (state) => {
   return {
     allSets: state.data.sets,
   };

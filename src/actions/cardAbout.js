@@ -7,7 +7,7 @@ export function cardAboutFetchDataSuccess(cardAbout){
 
 export function cardAboutFetchData(url){
   return (dispatch) => {
-    fetch(url)
+    fetch(url).catch((error)=>{console.log(error);})
     .then(response => response.json())
     .then(cardAbout => dispatch(cardAboutFetchDataSuccess(cardAbout)))
     .catch(()=>{})
